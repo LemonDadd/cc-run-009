@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SugarLog 控糖日记</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 3C16 3 6 15 6 21a10 10 0 0 0 20 0C26 15 16 3 16 3Z' fill='%23d7263d'/%3E%3Cpath d='M11 22a5 5 0 0 0 5 5' stroke='%23fff' stroke-width='2.4' fill='none' stroke-linecap='round'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <span class="brand-drop">🩸</span>
+        <div class="brand-text">
+          <strong>SugarLog</strong>
+          <small>控糖日记</small>
+        </div>
+      </div>
+      <nav class="nav" id="nav">
+        <a href="#/dashboard" data-route="dashboard"><span class="nav-ico">🏠</span>首页</a>
+        <a href="#/glucose" data-route="glucose"><span class="nav-ico">🩸</span>血糖记录</a>
+        <a href="#/diet" data-route="diet"><span class="nav-ico">🍚</span>饮食记录</a>
+        <a href="#/medication" data-route="medication"><span class="nav-ico">💊</span>用药记录</a>
+        <a href="#/exercise" data-route="exercise"><span class="nav-ico">🏃</span>运动记录</a>
+        <a href="#/trends" data-route="trends"><span class="nav-ico">📈</span>趋势分析</a>
+        <a href="#/reports" data-route="reports"><span class="nav-ico">📄</span>报告导出</a>
+        <a href="#/knowledge" data-route="knowledge"><span class="nav-ico">📚</span>知识库</a>
+        <a href="#/settings" data-route="settings"><span class="nav-ico">⚙️</span>设置</a>
+      </nav>
+      <div class="sidebar-foot" id="sidebar-foot"></div>
+    </aside>
+    <main class="main">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menu-btn" aria-label="菜单">☰</button>
+        <h1 class="page-title" id="page-title">首页</h1>
+        <div class="topbar-right" id="topbar-right"></div>
+      </header>
+      <section class="view-root" id="view-root"><!-- view renders here --></section>
+    </main>
+  </div>
+
+  <div id="modal-root"></div>
+  <div id="toast-root" class="toast-root" aria-live="polite"></div>
+  <div id="report-print" class="report-print"></div>
+
+  <!-- 数据层 -->
+  <script src="js/db.js"></script>
+  <script src="js/data/foods.js"></script>
+  <script src="js/data/knowledge.js"></script>
+  <!-- 基础工具 -->
+  <script src="js/units.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/charts.js"></script>
+  <!-- 业务视图 -->
+  <script src="js/views/dashboard.js"></script>
+  <script src="js/views/glucose.js"></script>
+  <script src="js/views/diet.js"></script>
+  <script src="js/views/medication.js"></script>
+  <script src="js/views/exercise.js"></script>
+  <script src="js/views/trends.js"></script>
+  <script src="js/views/reports.js"></script>
+  <script src="js/views/knowledge.js"></script>
+  <script src="js/views/settings.js"></script>
+  <!-- 启动 -->
+  <script src="js/app.js"></script>
+</body>
+</html>
