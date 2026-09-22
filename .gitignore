@@ -1,9 +1,7 @@
-# 镜像要求挂载点为空；产物与轨迹写在侧目录下，勿提交进初始快照
+node_modules
+dist
+*.log
+.DS_Store
+
 workspace/
 traces/
-A/workspace/
-B/workspace/
-A/traces/
-B/traces/
-traces-A/
-traces-B/

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0d9488">
+  <title>SugarLog 控糖日记</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%230d9488' d='M12 2.5s6 6.9 6 11.2a6 6 0 1 1-12 0C6 9.4 12 2.5 12 2.5z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <!-- ===== 侧边导航（桌面端） ===== -->
+    <aside class="sidebar" id="sidebar">
+      <div class="brand">
+        <svg class="brand-logo" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2.5s6 6.9 6 11.2a6 6 0 1 1-12 0C6 9.4 12 2.5 12 2.5z"/></svg>
+        <div class="brand-text">
+          <strong>SugarLog</strong>
+          <span>控糖日记</span>
+        </div>
+      </div>
+      <nav class="nav" aria-label="主导航">
+        <a href="#/home" data-route="/home" class="nav-item"><svg class="icon"><use href="#i-home"/></svg><span>首页</span></a>
+        <a href="#/glucose" data-route="/glucose" class="nav-item"><svg class="icon"><use href="#i-droplet"/></svg><span>血糖记录</span></a>
+        <a href="#/meals" data-route="/meals" class="nav-item"><svg class="icon"><use href="#i-utensils"/></svg><span>饮食记录</span></a>
+        <a href="#/medication" data-route="/medication" class="nav-item"><svg class="icon"><use href="#i-pill"/></svg><span>用药记录</span></a>
+        <a href="#/exercise" data-route="/exercise" class="nav-item"><svg class="icon"><use href="#i-run"/></svg><span>运动记录</span></a>
+        <a href="#/trends" data-route="/trends" class="nav-item"><svg class="icon"><use href="#i-chart"/></svg><span>趋势分析</span></a>
+        <a href="#/reports" data-route="/reports" class="nav-item"><svg class="icon"><use href="#i-report"/></svg><span>报告导出</span></a>
+        <a href="#/knowledge" data-route="/knowledge" class="nav-item"><svg class="icon"><use href="#i-book"/></svg><span>知识库</span></a>
+        <a href="#/settings" data-route="/settings" class="nav-item"><svg class="icon"><use href="#i-settings"/></svg><span>个人与设置</span></a>
+      </nav>
+      <div class="sidebar-foot">
+        <span id="navTargetHint" class="target-hint"></span>
+      </div>
+    </aside>
+
+    <div class="sidebar-scrim" id="sidebarScrim" hidden></div>
+
+    <!-- ===== 主区域 ===== -->
+    <div class="main-wrap">
+      <header class="topbar">
+        <button class="icon-btn menu-btn" id="menuBtn" aria-label="打开菜单"><svg class="icon"><use href="#i-menu"/></svg></button>
+        <h1 class="page-title" id="pageTitle">首页</h1>
+        <div class="topbar-right">
+          <span class="unit-chip" id="unitChip"></span>
+        </div>
+      </header>
+
+      <main class="page" id="view" tabindex="-1"><!-- 视图渲染处 --></main>
+    </div>
+  </div>
+
+  <!-- ===== 底部导航（窄屏） ===== -->
+  <nav class="bottomnav" aria-label="快捷导航">
+    <a href="#/home" data-route="/home" class="bn-item"><svg class="icon"><use href="#i-home"/></svg><span>首页</span></a>
+    <a href="#/trends" data-route="/trends" class="bn-item"><svg class="icon"><use href="#i-chart"/></svg><span>趋势</span></a>
+    <button class="fab" id="fab" aria-label="快速记录"><svg class="icon"><use href="#i-plus"/></svg></button>
+    <a href="#/reports" data-route="/reports" class="bn-item"><svg class="icon"><use href="#i-report"/></svg><span>报告</span></a>
+    <button class="bn-item" id="moreBtn"><svg class="icon"><use href="#i-menu"/></svg><span>更多</span></button>
+  </nav>
+
+  <!-- ===== 快速记录菜单 ===== -->
+  <div class="sheet-scrim" id="quickScrim" hidden></div>
+  <div class="sheet quick-sheet" id="quickSheet" hidden>
+    <div class="sheet-handle"></div>
+    <h2 class="sheet-title">快速记录</h2>
+    <div class="quick-grid">
+      <button class="quick-tile" data-quick="glucose"><span class="qt-icon qt-g"><svg class="icon"><use href="#i-droplet"/></svg></span><span>血糖</span></button>
+      <button class="quick-tile" data-quick="meal"><span class="qt-icon qt-m"><svg class="icon"><use href="#i-utensils"/></svg></span><span>饮食</span></button>
+      <button class="quick-tile" data-quick="med"><span class="qt-icon qt-d"><svg class="icon"><use href="#i-pill"/></svg></span><span>用药</span></button>
+      <button class="quick-tile" data-quick="exercise"><span class="qt-icon qt-e"><svg class="icon"><use href="#i-run"/></svg></span><span>运动</span></button>
+    </div>
+  </div>
+
+  <!-- ===== 更多菜单（窄屏） ===== -->
+  <div class="sheet" id="moreSheet" hidden>
+    <div class="sheet-handle"></div>
+    <h2 class="sheet-title">全部功能</h2>
+    <nav class="more-list">
+      <a href="#/medication" data-route="/medication"><svg class="icon"><use href="#i-pill"/></svg>用药记录</a>
+      <a href="#/exercise" data-route="/exercise"><svg class="icon"><use href="#i-run"/></svg>运动记录</a>
+      <a href="#/knowledge" data-route="/knowledge"><svg class="icon"><use href="#i-book"/></svg>糖尿病知识库</a>
+      <a href="#/settings" data-route="/settings"><svg class="icon"><use href="#i-settings"/></svg>个人与设置</a>
+      <a href="#/reminders" data-route="/reminders"><svg class="icon"><use href="#i-clock"/></svg>提醒管理</a>
+    </nav>
+  </div>
+
+  <!-- ===== 弹层 / Toast ===== -->
+  <div class="modal-scrim" id="modalScrim" hidden></div>
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" hidden></div>
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <!-- ===== SVG 图标库 ===== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-home" viewBox="0 0 24 24"><path d="M3 10.5 12 3l9 7.5"/><path d="M5 9.5V21h14V9.5"/><path d="M9.5 21v-6h5v6"/></symbol>
+    <symbol id="i-droplet" viewBox="0 0 24 24"><path d="M12 2.7s6.5 7.2 6.5 11.5a6.5 6.5 0 1 1-13 0C5.5 9.9 12 2.7 12 2.7z"/></symbol>
+    <symbol id="i-utensils" viewBox="0 0 24 24"><path d="M4 3v7a2 2 0 0 0 2 2v9"/><path d="M6 3v7"/><path d="M8 3v7a2 2 0 0 1-2 2"/><path d="M16 3c-1.7 0-3 2.2-3 5s1.3 5 3 5v8"/></symbol>
+    <symbol id="i-pill" viewBox="0 0 24 24"><rect x="2.5" y="8.2" width="19" height="7.6" rx="3.8" transform="rotate(-45 12 12)"/><path d="M9 8.8 15.2 15"/></symbol>
+    <symbol id="i-run" viewBox="0 0 24 24"><circle cx="14.5" cy="4.7" r="1.8"/><path d="M13.5 8.5 10 11l2 3-1 5"/><path d="m10 11-3 .5"/><path d="m12 14 4 2 3-2.5"/><path d="m6 18.5 2-2.5"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="m7 14 3-4 3 2.5L20 6"/></symbol>
+    <symbol id="i-report" viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/><path d="M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2z"/><path d="M4 19a2 2 0 0 1 2-2h14"/></symbol>
+    <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.6 1.6 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.6 1.6 0 0 0-2.7 1.1V21a2 2 0 1 1-4 0v-.2A1.6 1.6 0 0 0 7 19.4a1.6 1.6 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.6 1.6 0 0 0-1.1-2.7H1a2 2 0 1 1 0-4h.2A1.6 1.6 0 0 0 1.6 7l-.1-.1A2 2 0 1 1 4.3 4.1l.1.1a1.6 1.6 0 0 0 1.8.3H6.4a1.6 1.6 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.2a1.6 1.6 0 0 0 2.7 1.1l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.6 1.6 0 0 0-.3 1.8v.2a1.6 1.6 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.2a1.6 1.6 0 0 0-1.4 1z"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></symbol>
+    <symbol id="i-back" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></symbol>
+    <symbol id="i-trash" viewBox="0 0 24 24"><path d="M4 7h16"/><path d="M9 7V5h6v2"/><path d="M6 7l1 13h10l1-13"/><path d="M10 11v6M14 11v6"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3 2 20h20z"/><path d="M12 9v5M12 17.5v.1"/></symbol>
+    <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="m7 11 5 5 5-5"/><path d="M4 19h16"/></symbol>
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M7 9V3h10v6"/><rect x="4" y="9" width="16" height="8" rx="1.5"/><path d="M7 14h10v7H7z"/></symbol>
+    <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></symbol>
+    <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 9h18M8 3v4M16 3v4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-6 8-6s8 2 8 6"/></symbol>
+    <symbol id="i-edit" viewBox="0 0 24 24"><path d="M4 20h4L19.5 8.5a2.1 2.1 0 0 0-3-3L5 17z"/><path d="M14 7.5 16.5 10"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="M6 6l12 12M18 6 6 18"/></symbol>
+    <symbol id="i-chevron-right" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+  </svg>
+
+  <!-- 脚本：顺序加载，零构建 -->
+  <script src="js/utils.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/data/foods.js"></script>
+  <script src="js/data/meds.js"></script>
+  <script src="js/data/knowledge.js"></script>
+  <script src="js/charts.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/views/home.js"></script>
+  <script src="js/views/glucose.js"></script>
+  <script src="js/views/meals.js"></script>
+  <script src="js/views/medication.js"></script>
+  <script src="js/views/exercise.js"></script>
+  <script src="js/views/trends.js"></script>
+  <script src="js/views/reports.js"></script>
+  <script src="js/views/knowledge.js"></script>
+  <script src="js/views/settings.js"></script>
+</body>
+</html>
